@@ -1,0 +1,16 @@
+{
+  "name": "hello-world-graphql",
+  "version": "1.0.1",
+  "main": "index.js",
+  "author": "luizbp <luiz.bpereira@outlook.com>",
+  "license": "MIT",
+  "dependencies": {
+    "graphql-yoga": "^1.18.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.14"
+  },
+  "scripts":{
+    "start": "nodemon src/server.js"
+  }
+}
