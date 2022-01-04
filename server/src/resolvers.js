@@ -30,6 +30,17 @@ module.exports = {
         name,
         email,
       };
-    }
+    },
+    updateUser: (_, { id, name, email }) => {
+      let teste = users.filter((user) => {
+        return user.id === parseInt(id);
+      });
+
+      if(!teste.length) return []
+
+      teste[0].name = name
+      teste[0].email = email
+      return teste[0];
+    },
   },
 };
