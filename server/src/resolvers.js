@@ -17,16 +17,21 @@ module.exports = {
 
   // Tipo de funções que alteram os dados, semelhante ao POST, PUT, PATCH, DELETE
   Mutation: {
-    createUser: (_, { name, email }) => {
-      // Busca o ultimo id do Array
-      let lastId = users.length ? users[users.length - 1].id : 0;
+    createUser: (_, { name, email, id = 0 }) => {
+      // Busca o ultimo id do Array   
+      let newId = 0
 
-      let id = lastId + 1;
+      if(id) newId = id
+      else {
+        let lastId = users.length ? users[users.length - 1].id : 0;
+        newId = lastId + 1;
+      }
+      
       
       // insere o novo user
-      users.push({ id, name, email });
+      users.push({ id: newId, name, email });
       return {
-        id,
+        id: newId,
         name,
         email,
       };
