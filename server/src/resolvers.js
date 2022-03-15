@@ -17,11 +17,11 @@ module.exports = {
 
   // Tipo de funções que alteram os dados, semelhante ao POST, PUT, PATCH, DELETE
   Mutation: {
-    createUser: (_, { name, email, id = 0 }) => {
+    createUser: (_, { name, email, id = "" }) => {
       // Busca o ultimo id do Array   
       let newId = 0
 
-      if(id) newId = id
+      if(id) newId = parseInt(id)
       else {
         let lastId = users.length ? users[users.length - 1].id : 0;
         newId = lastId + 1;
