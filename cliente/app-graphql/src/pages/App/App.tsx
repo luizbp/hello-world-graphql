@@ -38,10 +38,19 @@ function App() {
   };
 
   const updateAndInsertData = async () => {
-    const action =
-      inputAction === "insert"
-        ? `createUser(name:"${inputName}", email:"${inputEmail}")`
-        : `updateUser(id:"${inputId}", name:"${inputName}", email:"${inputEmail}")`;
+    let action = ''
+
+    switch (inputAction) {
+      case 'insert':
+          action = `createUser(name:"${inputName}", email:"${inputEmail}")`
+      break;
+      case 'update':
+        action = `updateUser(id:"${inputId}", name:"${inputName}", email:"${inputEmail}")`
+      break;
+      default:
+        action = `deleteUser(id:"${inputId}")`
+      break;
+    }
 
     const req = {
       query: `
@@ -94,6 +103,7 @@ function App() {
             >
               <option value="insert">Adicionar</option>
               <option value="update">Atualizar</option>
+              <option value="delete">Deletar</option>
             </select>
           </div>
           <div className="box-input">
@@ -110,6 +120,7 @@ function App() {
             <label htmlFor="inputName">Nome</label>
             <input
               name="inputName"
+              disabled={inputAction === "delete"}
               type="text"
               value={inputName}
               onChange={(e: any) => setInputName(e.target.value)}
@@ -120,6 +131,7 @@ function App() {
             <input
               name="email"
               type="text"
+              disabled={inputAction === "delete"}
               value={inputEmail}
               onChange={(e: any) => setInputEmail(e.target.value)}
             />
@@ -127,7 +139,9 @@ function App() {
         </div>
         <div>
           <button onClick={updateAndInsertData}>
-            {inputAction === "insert" ? "Adicionar" : "Atualizar"}
+            {inputAction === "insert" ? "Adicionar" : ""}
+            {inputAction === "update" ? "Atualizar" : ""}
+            {inputAction === "delete" ? "Deletar" : ""}
           </button>
         </div>
       </div>
